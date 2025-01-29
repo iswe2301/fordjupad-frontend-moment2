@@ -1,9 +1,16 @@
 // Variabel för att lagra API:ets URL
 const url = "https://fordjupad-frontend-moment2-api.onrender.com";
 
-// Interface för en todo
+// Interface för en befintlig todo
 export interface Todo {
-    id?: number;
+    _id: number;
+    title: string;
+    description?: string; // Frivillig sträng
+    status: "Ej påbörjad" | "Pågående" | "Avklarad"; // Giltiga statusar
+}
+
+// Interface för en ny todo (utan id)
+export interface NewTodo {
     title: string;
     description?: string; // Frivillig sträng
     status: "Ej påbörjad" | "Pågående" | "Avklarad"; // Giltiga statusar
@@ -23,8 +30,8 @@ export const getTodos = async () => {
     }
 };
 
-// Funktion för att skapa en ny todo, tar emot en todo som parameter (av typen Todo-interface)
-export const createTodo = async (todo: Todo) => {
+// Funktion för att skapa en ny todo, tar emot en todo som parameter (av typen NewTodo-interface)
+export const createTodo = async (todo: NewTodo) => {
     try {
         const response = await fetch(`${url}/todo`, {
             method: "POST", // Använder POST-metoden för att skapa en ny todo
@@ -47,7 +54,7 @@ export const createTodo = async (todo: Todo) => {
 // Funktion för att uppdatera en todo
 export const updateTodo = async (todo: Todo) => {
     try {
-        const response = await fetch(`${url}/todo/${todo.id}`, {
+        const response = await fetch(`${url}/todo/${todo._id}`, {
             method: "PUT", // Använder PUT-metoden för att uppdatera en todo
             headers: {
                 "Content-Type": "application/json",
