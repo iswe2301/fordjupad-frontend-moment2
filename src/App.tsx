@@ -52,6 +52,14 @@ function App() {
   // Funktion för att ta bort en todo från listan
   const deleteOneTodo = async (_id: string) => {
     try {
+      // Hämtar den todo som ska tas bort från listan med todos
+      const todoToDelete = todos.find((todo) => todo._id === _id);
+      // Kastar ett fel om todon inte finns
+      if (!todoToDelete) throw new Error("Todo hittades inte");
+      // Visar en bekräftelseruta för att bekräfta att användaren vill ta bort todon
+      const confirmDelete = window.confirm(`Är du säker på att du vill ta bort uppgiften "${todoToDelete.title}"?\nUppgiftens status: ${todoToDelete.status}`);
+      // Avbryter om användaren inte vill ta bort todon
+      if (!confirmDelete) return;
       await deleteTodo(_id); // Anropar funktion för att ta bort en todo via API:et
       setTodos((existingTodos) => existingTodos.filter((todo) => todo._id !== _id)); // Uppdaterar listan med todos genom att filtrera bort den todo som ska tas bort
     } catch (err) {
