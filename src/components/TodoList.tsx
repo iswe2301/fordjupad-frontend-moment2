@@ -25,7 +25,8 @@ const TodoList = ({ todos, loading, error, updateTodoStatus, deleteOneTodo }: To
                         return statusOrder[a.status] - statusOrder[b.status];
                         // Loopar igenom varje todo och skapar en li för varje todo
                     }).map((todo) => (
-                        <li key={todo._id} className="todo-item">
+                        // Skapar en klass för varje todo beroende på status (Ej påbörjad, Pågående, Avklarad i små bokstäver utan svenska tecken och med bindestreck)
+                        <li key={todo._id} className={`todo-item ${todo.status.toLowerCase().replace(/ /g, "-").replace(/å/g, "a").replace("ä", "a").replace("ö", "o")}`}>
                             <div className="item-container">
                                 <h3>{todo.title}</h3>
                                 {/* Skriver ut beskrivning om det finns någon */}
