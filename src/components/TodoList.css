@@ -20,6 +20,26 @@
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Styling för todo-items med olika status */
+.todo-item.ej-paborjad {
+    background-color: #f0f0f0;
+    border-left: 0.5rem solid #6c757d;
+}
+
+.todo-item.pagaende {
+    background-color: #fff3cd;
+    border-left: 0.5rem solid #ffc107;
+}
+
+.todo-item.avklarad {
+    background-color: #d4edda;
+    border-left: 0.5rem solid #28a745;
+}
+
+.todo-item.avklarad .item-container {
+    text-decoration: line-through;
+}
+
 /* Dropdown select för status */
 .todo-item select {
     font-family: "Verdana", sans-serif;
@@ -41,6 +61,7 @@
 /* Container för action-innehåll */
 .change-content {
     max-width: 175px;
+    text-decoration: none !important;
 }
 
 /* Ta bort-knapp */
