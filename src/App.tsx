@@ -2,7 +2,7 @@ import './App.css'
 import { useState, useEffect } from 'react' // Importerar useState och useEffect från react
 import TodoList from './components/TodoList' // Importerar TodoList-komponenten
 import TodoForm from './components/TodoForm' // Importerar TodoForm-komponenten
-import { Todo, getTodos } from './services/todoServices' // Importerar Todo och getTodos från todoServices
+import { Todo, getTodos, updateTodo } from './services/todoServices' // Importerar Todo och getTodos från todoServices
 
 function App() {
 
@@ -35,13 +35,26 @@ function App() {
     setTodos((existingTodos) => [...existingTodos, newTodo]); // Lägger till den nya todon i listan med todos
   };
 
+  // Funktion för att uppdatera en todos status, tar emot id och ny status som parametrar
+  const updateTodoStatus = async (_id: number, newStatus: "Ej påbörjad" | "Pågående" | "Avklarad") => {
+    try {
+      const existingTodo = todos.find((todo) => todo._id === _id); // Hämtar den todo som ska uppdateras från listan med todos
+      if (!existingTodo) throw new Error("Todo hittades inte"); // Kastar ett fel om todon inte finns
+      const updatedTodo = await updateTodo({ ...existingTodo, status: newStatus }); // Anropar funktion för att uppdatera en todo via API:et
+      setTodos((existingTodos) => existingTodos.map((todo) => (todo._id === _id ? updatedTodo : todo))); // Uppdaterar listan med todos med den uppdaterade todon
+    } catch (err) {
+      console.error("Fel vid uppdatering av todo-status:", err); // Loggar eventuella fel
+      setError("Kunde inte uppdatera todo-status. Försök igen senare."); // Uppdaterar state för felhantering med felmeddelande
+    }
+  }
+
   return (
     <>
       <h1>Uppgifter</h1>
       {/* Renderar TodoForm-komponenten och skickar med addTodo-funktionen som prop */}
       <TodoForm addTodo={addTodo} />
-      {/* Renderar TodoList-komponenten och skickar med todos, laddning och fel som props */}
-      <TodoList todos={todos} loading={loading} error={error} />
+      {/* Renderar TodoList-komponenten och skickar med props */}
+      <TodoList todos={todos} loading={loading} error={error} updateTodoStatus={updateTodoStatus}/>
     </>
   )
 }
