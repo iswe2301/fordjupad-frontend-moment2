@@ -11,6 +11,7 @@ function App() {
   const [todos, setTodos] = useState<Todo[]>([]); // State för todos av typen Todo-array, tom array som standard
   const [loading, setLoading] = useState(true); // State för laddning, true som standard (boolean)
   const [error, setError] = useState<string | null>(null); // State för felhantering, string eller null, null som standard
+  const [confirmation, setConfirmation] = useState<string | null>(null); // State för bekräftelse, string eller null, null som standard
 
   // Använder useEffect för att hämta todos från API:et när komponenten renderas
   useEffect(() => {
@@ -31,9 +32,18 @@ function App() {
     }
   };
 
+  // Funktion för att visa en bekräftelserruta
+  const showConfirmation = (message: string) => {
+    setConfirmation(message); // Uppdaterar state för bekräftelse med meddelandet
+    setTimeout(() => {
+      setConfirmation(null);
+    }, 5000); // Döljer bekräftelsen efter 5 sekunder
+  }
+
   // Funktion för att lägga till en ny todo i listan
   const addTodo = (newTodo: Todo) => {
     setTodos((existingTodos) => [...existingTodos, newTodo]); // Lägger till den nya todon i listan med todos
+    showConfirmation(`Ny uppgift "${newTodo.title}" skapad!`); // Visar en bekräftelseruta med meddelande om att todon har skapats
   };
 
   // Funktion för att uppdatera en todos status, tar emot id och ny status som parametrar
@@ -43,6 +53,7 @@ function App() {
       if (!existingTodo) throw new Error("Todo hittades inte"); // Kastar ett fel om todon inte finns
       const updatedTodo = await updateTodo({ ...existingTodo, status: newStatus }); // Anropar funktion för att uppdatera en todo via API:et
       setTodos((existingTodos) => existingTodos.map((todo) => (todo._id === _id ? updatedTodo : todo))); // Uppdaterar listan med todos med den uppdaterade todon
+      showConfirmation(`Uppgift "${updatedTodo.title}" uppdaterad! Ny status: ${updatedTodo.status}`); // Visar en bekräftelseruta med meddelande om att todon har uppdaterats
     } catch (err) {
       console.error("Fel vid uppdatering av todo-status:", err); // Loggar eventuella fel
       setError("Kunde inte uppdatera todo-status. Försök igen senare."); // Uppdaterar state för felhantering med felmeddelande
@@ -62,6 +73,7 @@ function App() {
       if (!confirmDelete) return;
       await deleteTodo(_id); // Anropar funktion för att ta bort en todo via API:et
       setTodos((existingTodos) => existingTodos.filter((todo) => todo._id !== _id)); // Uppdaterar listan med todos genom att filtrera bort den todo som ska tas bort
+      showConfirmation(`Uppgift "${todoToDelete.title}" borttagen!`); // Visar en bekräftelseruta med meddelande om att todon har tagits bort
     } catch (err) {
       console.error("Fel vid borttagning av todo:", err); // Loggar eventuella fel
       setError("Kunde inte ta bort todo. Försök igen senare."); // Uppdaterar state för felhantering med felmeddelande
@@ -75,6 +87,8 @@ function App() {
       <TodoForm addTodo={addTodo} />
       {/* Renderar TodoList-komponenten och skickar med props */}
       <TodoList todos={todos} loading={loading} error={error} updateTodoStatus={updateTodoStatus} deleteOneTodo={deleteOneTodo} />
+      {/* Visar en bekräftelseruta om det finns ett meddelande */}
+      {confirmation && <div className="confirmation-popup">{confirmation}</div>}
     </div>
   )
 }
