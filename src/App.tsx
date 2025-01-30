@@ -61,13 +61,13 @@ function App() {
   }
 
   return (
-    <>
+    <div className="container">
       <h1>Uppgifter</h1>
       {/* Renderar TodoForm-komponenten och skickar med addTodo-funktionen som prop */}
       <TodoForm addTodo={addTodo} />
       {/* Renderar TodoList-komponenten och skickar med props */}
       <TodoList todos={todos} loading={loading} error={error} updateTodoStatus={updateTodoStatus} deleteOneTodo={deleteOneTodo} />
-    </>
+    </div>
   )
 }
 
