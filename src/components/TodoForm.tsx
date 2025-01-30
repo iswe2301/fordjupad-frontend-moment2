@@ -1,3 +1,4 @@
+import "./TodoForm.css"; // Importerar css-filen för TodoForm
 import { useState } from "react"; // Importerar useState från react
 import * as Yup from "yup"; // r Yup från biblioteket yup
 import { createTodo } from "../services/todoServices"; // Importerar funktionen för att skapa en ny todo
@@ -14,9 +15,7 @@ const TodoForm = ({ addTodo }: TodoFormProps) => {
         description: Yup.string()
             .max(200, "Beskrivningen får max vara 200 tecken"),
         status: Yup.string()
-            .transform((value) => (value === "" ? null : value)) // Konvertera tom sträng till null
             .oneOf(["Ej påbörjad", "Pågående", "Avklarad"], "Ogiltig status") // Tillåtna värden för status
-            .required("Du måste välja en status"), // Kräv att status är ifylld
     });
 
     // State för formulärdata
@@ -58,40 +57,39 @@ const TodoForm = ({ addTodo }: TodoFormProps) => {
     };
 
     return (
-        <div>
+        <div className="form-container">
             <h2>Skapa ny uppgift</h2>
             {/* Formulär för att skapa en ny todo, anropa submitForm vid submit */}
-            <form onSubmit={submitForm}>
+            <form className="todo-form" onSubmit={submitForm}>
                 <div>
-                    <label htmlFor="title">Titel:</label>
+                    <label htmlFor="title">Titel</label>
                     {/* Input-fält för titel, uppdaterar state vid ändring */}
                     <input type="text" id="title" value={formData.title} onChange={(event) => setFormData({ ...formData, title: event.target.value })} />
                     {/* Visa felmeddelande för titel om det finns något */}
-                    {errors.title && <span>{errors.title}</span>}
+                    {errors.title && <span className="error-message">{errors.title}</span>}
                 </div>
 
                 <div>
-                    <label htmlFor="description">Beskrivning:</label>
+                    <label htmlFor="description">Beskrivning</label>
                     {/* Textarea för beskrivning, uppdaterar state vid ändring */}
-                    <textarea id="description" value={formData.description} onChange={(event) => setFormData({ ...formData, description: event.target.value })} />
+                    <textarea id="description" rows={5} value={formData.description} onChange={(event) => setFormData({ ...formData, description: event.target.value })} />
                     {/* Visa felmeddelande för beskrivning om det finns något */}
-                    {errors.description && <span>{errors.description}</span>}
+                    {errors.description && <span className="error-message">{errors.description}</span>}
                 </div>
 
                 <div>
-                    <label htmlFor="status">Status:</label>
+                    <label htmlFor="status">Status</label>
                     {/* Select för status, uppdaterar state vid ändring med vald status */}
                     <select id="status" value={formData.status} onChange={(event) => setFormData({ ...formData, status: event.target.value as "Ej påbörjad" | "Pågående" | "Avklarad" })}>
-                        <option value="">-- Välj status --</option>
-                        <option value="Ej påbörjad">Ej påbörjad</option>
-                        <option value="Pågående">Pågående</option>
-                        <option value="Avklarad">Avklarad</option>
+                        <option value="Ej påbörjad">⭕ Ej påbörjad</option>
+                        <option value="Pågående">⏳ Pågående</option>
+                        <option value="Avklarad">✅ Avklarad</option>
                     </select>
                     {/* Visa felmeddelande för status om det finns något */}
-                    {errors.status && <span>{errors.status}</span>}
+                    {errors.status && <span className="error-message">{errors.status}</span>}
                 </div>
                 {/* Knapp för att skicka formuläret */}
-                <button type="submit">Lägg till Todo</button>
+                <button type="submit">📌 Spara uppgift</button>
             </form>
         </div>
     );
