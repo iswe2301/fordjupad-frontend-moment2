@@ -83,8 +83,10 @@ function App() {
   return (
     <div className="container">
       <h1>Uppgifter</h1>
+      <hr></hr>
       {/* Renderar TodoForm-komponenten och skickar med addTodo-funktionen som prop */}
       <TodoForm addTodo={addTodo} />
+      <hr></hr>
       {/* Renderar TodoList-komponenten och skickar med props */}
       <TodoList todos={todos} loading={loading} error={error} updateTodoStatus={updateTodoStatus} deleteOneTodo={deleteOneTodo} />
       {/* Visar en bekräftelseruta om det finns ett meddelande */}
