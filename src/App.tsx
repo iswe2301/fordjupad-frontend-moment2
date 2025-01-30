@@ -2,7 +2,7 @@ import './App.css'
 import { useState, useEffect } from 'react' // Importerar useState och useEffect från react
 import TodoList from './components/TodoList' // Importerar TodoList-komponenten
 import TodoForm from './components/TodoForm' // Importerar TodoForm-komponenten
-import { Todo, getTodos, updateTodo } from './services/todoServices' // Importerar Todo och getTodos från todoServices
+import { Todo, getTodos, updateTodo, deleteTodo } from './services/todoServices' // Importerar Todo och getTodos från todoServices
 
 function App() {
 
@@ -48,13 +48,24 @@ function App() {
     }
   }
 
+  // Funktion för att ta bort en todo från listan
+  const deleteOneTodo = async (_id: number) => {
+    try {
+      await deleteTodo(_id); // Anropar funktion för att ta bort en todo via API:et
+      setTodos((existingTodos) => existingTodos.filter((todo) => todo._id !== _id)); // Uppdaterar listan med todos genom att filtrera bort den todo som ska tas bort
+    } catch (err) {
+      console.error("Fel vid borttagning av todo:", err); // Loggar eventuella fel
+      setError("Kunde inte ta bort todo. Försök igen senare."); // Uppdaterar state för felhantering med felmeddelande
+    }
+  }
+
   return (
     <>
       <h1>Uppgifter</h1>
       {/* Renderar TodoForm-komponenten och skickar med addTodo-funktionen som prop */}
       <TodoForm addTodo={addTodo} />
       {/* Renderar TodoList-komponenten och skickar med props */}
-      <TodoList todos={todos} loading={loading} error={error} updateTodoStatus={updateTodoStatus}/>
+      <TodoList todos={todos} loading={loading} error={error} updateTodoStatus={updateTodoStatus} deleteOneTodo={deleteOneTodo} />
     </>
   )
 }
