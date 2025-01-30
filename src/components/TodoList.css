@@ -1,0 +1,142 @@
+/* Container för lista */
+.todo-container {
+    margin: 3rem 0 0 0;
+}
+
+/* Liststyling */
+.todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Todo-item */
+.todo-item {
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown select för status */
+.todo-item select {
+    font-family: "Verdana", sans-serif;
+    width: auto;
+    padding: 0.5rem;
+    border-radius: 5px;
+    max-width: 140px;
+    margin-left: auto;
+}
+
+/* Container inuti en todo-item */
+.item-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+}
+
+/* Container för action-innehåll */
+.change-content {
+    max-width: 175px;
+}
+
+/* Ta bort-knapp */
+.delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 140px;
+    margin-left: auto;
+    font-family: "Verdana", sans-serif;
+    background: #dc3545;
+    color: white;
+    padding: 0.2rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+    margin-top: 1rem;
+}
+
+.delete-btn:hover {
+    background: #bd2130;
+}
+
+/* Laddningsanimation */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.loading {
+    display: inline-block;
+    margin-right: 1rem;
+    width: 2rem;
+    height: 2rem;
+    border: 6px solid rgba(0, 0, 0, 0.2);
+    border-top-color: #0072ed;
+    border-radius: 50%;
+    animation: spinning 0.8s linear infinite;
+}
+
+/* Keyframes för laddningsanimation */
+@keyframes spinning {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+        /* Rotera ett helt varv */
+    }
+}
+
+/* Styling för felmeddelande */
+.error-msg {
+    background-color: #ffdddd;
+    color: #d8000c;
+    padding: 1rem;
+    border: 1px solid #d8000c;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Responsiv design */
+@media (max-width: 600px) {
+    .todo-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+
+    .delete-btn {
+        max-width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .item-container {
+        padding: 0;
+    }
+
+    .change-content {
+        max-width: 100%;
+    }
+
+
+    .todo-item select {
+        margin-top: 1rem;
+        width: 100%;
+        max-width: 100%;
+    }
+}
