@@ -1,20 +1,7 @@
+import { Todo, NewTodo } from "../types/interfaces"; // Importerar interface för todo och ny todo
+
 // Variabel för att lagra API:ets URL
 const url = "https://fordjupad-frontend-moment2-api.onrender.com";
-
-// Interface för en befintlig todo
-export interface Todo {
-    _id: number;
-    title: string;
-    description?: string; // Frivillig sträng
-    status: "Ej påbörjad" | "Pågående" | "Avklarad"; // Giltiga statusar
-}
-
-// Interface för en ny todo (utan id)
-export interface NewTodo {
-    title: string;
-    description?: string; // Frivillig sträng
-    status: "Ej påbörjad" | "Pågående" | "Avklarad"; // Giltiga statusar
-}
 
 // Funktion för att hämta alla todos
 export const getTodos = async () => {
@@ -73,9 +60,9 @@ export const updateTodo = async (todo: Todo) => {
 };
 
 // Funktion för att ta bort en todo
-export const deleteTodo = async (id: number) => {
+export const deleteTodo = async (_id: string) => {
     try {
-        const response = await fetch(`${url}/todo/${id}`, {
+        const response = await fetch(`${url}/todo/${_id}`, {
             method: "DELETE", // Använder DELETE-metoden för att ta bort en todo
         });
         if (!response.ok) {

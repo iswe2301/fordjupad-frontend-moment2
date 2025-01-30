@@ -1,28 +1,10 @@
 import { useState } from "react"; // Importerar useState från react
 import * as Yup from "yup"; // r Yup från biblioteket yup
-import { createTodo, Todo } from "../services/todoServices"; // Importerar funktionen för att skapa en ny todo
-
-// Interface för en todo
-interface TodoFormProps {
-    addTodo: (newTodo: Todo) => void; // Funktion för att lägga till en ny todo
-}
+import { createTodo } from "../services/todoServices"; // Importerar funktionen för att skapa en ny todo
+import { TodoFormProps, FormData, ErrorsData } from "../types/interfaces"; // Importerar interface för props, formulärdata och felmeddelanden
 
 // Komponent för att skapa en ny todo, tar emot addTodo som prop (av typen TodoFormProps)
 const TodoForm = ({ addTodo }: TodoFormProps) => {
-
-    // Interface för formulärdata
-    interface FormData {
-        title: string;
-        description: string;
-        status: "Ej påbörjad" | "Pågående" | "Avklarad"; // Giltiga statusar
-    }
-
-    // Tnterface för felmeddelanden
-    interface ErrorsData {
-        title?: string;
-        description?: string;
-        status?: string;
-    }
 
     // Valideringsschema med Yup
     const validationSchema = Yup.object().shape({

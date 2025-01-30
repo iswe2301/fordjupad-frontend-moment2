@@ -1,13 +1,4 @@
-import { Todo } from "../services/todoServices"; // Importerar getTodos och Todo från todoServices
-
-// Interface för props
-interface TodoListProps {
-    todos: Todo[]; // Array med todos
-    loading: boolean; // Boolean för laddning
-    error: string | null; // Sträng eller null för felmeddelanden
-    updateTodoStatus: (id: number, newStatus: "Ej påbörjad" | "Pågående" | "Avklarad") => void; // Funktion för att uppdatera en todos status
-    deleteOneTodo: (id: number) => void; // Funktion för att ta bort en todo
-}
+import { TodoListProps } from "../types/interfaces"; // Importerar interface för props
 
 // Funktion som skapar en lista med todos, tar emot props av typen TodoListProps
 const TodoList = ({ todos, loading, error, updateTodoStatus, deleteOneTodo }: TodoListProps) => {

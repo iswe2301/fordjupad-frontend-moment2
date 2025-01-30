@@ -2,7 +2,8 @@ import './App.css'
 import { useState, useEffect } from 'react' // Importerar useState och useEffect från react
 import TodoList from './components/TodoList' // Importerar TodoList-komponenten
 import TodoForm from './components/TodoForm' // Importerar TodoForm-komponenten
-import { Todo, getTodos, updateTodo, deleteTodo } from './services/todoServices' // Importerar Todo och getTodos från todoServices
+import { getTodos, updateTodo, deleteTodo } from './services/todoServices' // Importerar Todo och getTodos från todoServices
+import { Todo } from './types/interfaces' // Importerar Todo-interface
 
 function App() {
 
@@ -36,7 +37,7 @@ function App() {
   };
 
   // Funktion för att uppdatera en todos status, tar emot id och ny status som parametrar
-  const updateTodoStatus = async (_id: number, newStatus: "Ej påbörjad" | "Pågående" | "Avklarad") => {
+  const updateTodoStatus = async (_id: string, newStatus: "Ej påbörjad" | "Pågående" | "Avklarad") => {
     try {
       const existingTodo = todos.find((todo) => todo._id === _id); // Hämtar den todo som ska uppdateras från listan med todos
       if (!existingTodo) throw new Error("Todo hittades inte"); // Kastar ett fel om todon inte finns
@@ -49,7 +50,7 @@ function App() {
   }
 
   // Funktion för att ta bort en todo från listan
-  const deleteOneTodo = async (_id: number) => {
+  const deleteOneTodo = async (_id: string) => {
     try {
       await deleteTodo(_id); // Anropar funktion för att ta bort en todo via API:et
       setTodos((existingTodos) => existingTodos.filter((todo) => todo._id !== _id)); // Uppdaterar listan med todos genom att filtrera bort den todo som ska tas bort
