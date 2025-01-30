@@ -1,0 +1,53 @@
+/* Global styling */
+* {
+    box-sizing: border-box;
+}
+
+/* Grundläggande layout */
+body {
+    font-family: "Verdana", sans-serif;
+    background-color: #f1faff;
+    color: #333;
+    padding: 4rem 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* Rubriker */
+h1 {
+    text-align: center;
+    color: #000;
+}
+
+h2 {
+    margin: 2rem 0 1.5rem;
+}
+
+h3 {
+    margin: 1rem 0;
+}
+
+/* Paragrafer */
+p {
+    font-size: 0.9rem;
+}
+
+/* Responsiv design */
+@media (max-width: 600px) {
+
+    body {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+}
