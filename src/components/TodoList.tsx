@@ -17,8 +17,14 @@ const TodoList = ({ todos, loading, error, updateTodoStatus, deleteOneTodo }: To
                 <p>Inga uppgifter att göra.</p>
             ) : (
                 <ul className="todo-list">
-                    {/* Loopar igenom todos och skriver ut de i en lista */}
-                    {todos.map((todo) => (
+                    {/* Använder slice för att skapa en kopia av todos och sortera den */}
+                    {todos.slice().sort((a, b) => {
+                        // Skapar ett objekt statusordning för att sortera todos efter status
+                        const statusOrder = { "Ej påbörjad": 1, "Pågående": 2, "Avklarad": 3 };
+                        // Sorterar todos efter statusordning
+                        return statusOrder[a.status] - statusOrder[b.status];
+                        // Loopar igenom varje todo och skapar en li för varje todo
+                    }).map((todo) => (
                         <li key={todo._id} className="todo-item">
                             <div className="item-container">
                                 <h3>{todo.title}</h3>
