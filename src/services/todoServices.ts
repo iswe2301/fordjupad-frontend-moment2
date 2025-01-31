@@ -10,7 +10,8 @@ export const getTodos = async () => {
         if (!response.ok) {
             throw new Error("Något gick fel vid hämtning av todos"); // Kastar ett fel om det inte går att hämta todos
         }
-        return response.json(); // Returnerar alla todos som JSON
+        const data = await response.json(); // Konverterar svaret från API:et till JSON
+        return Array.isArray(data) ? data : []; // Returnerar en array med todos, om det inte finns några todos returneras en tom array
     } catch (error) {
         console.error(error); // Loggar eventuella fel
         throw error; // Kastar ett fel
