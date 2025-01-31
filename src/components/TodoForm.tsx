@@ -64,7 +64,7 @@ const TodoForm = ({ addTodo }: TodoFormProps) => {
                 <div>
                     <label htmlFor="title">Titel</label>
                     {/* Input-fält för titel, uppdaterar state vid ändring */}
-                    <input type="text" id="title" value={formData.title} onChange={(event) => setFormData({ ...formData, title: event.target.value })} />
+                    <input type="text" id="title" placeholder="Ange en titel"value={formData.title} onChange={(event) => setFormData({ ...formData, title: event.target.value })} />
                     {/* Visa felmeddelande för titel om det finns något */}
                     {errors.title && <span className="error-message">{errors.title}</span>}
                 </div>
@@ -72,7 +72,7 @@ const TodoForm = ({ addTodo }: TodoFormProps) => {
                 <div>
                     <label htmlFor="description">Beskrivning</label>
                     {/* Textarea för beskrivning, uppdaterar state vid ändring */}
-                    <textarea id="description" rows={5} value={formData.description} onChange={(event) => setFormData({ ...formData, description: event.target.value })} />
+                    <textarea id="description" placeholder="Beskriv din uppgift..."rows={5} value={formData.description} onChange={(event) => setFormData({ ...formData, description: event.target.value })} />
                     {/* Visa felmeddelande för beskrivning om det finns något */}
                     {errors.description && <span className="error-message">{errors.description}</span>}
                 </div>
