@@ -5,7 +5,7 @@ import { TodoListProps } from "../types/interfaces"; // Importerar interface fö
 const TodoList = ({ todos, loading, error, updateTodoStatus, deleteOneTodo }: TodoListProps) => {
 
     // Visar laddningsmeddelande om staten är true
-    if (loading) return <div className="loading-container"><div className="loading"></div><p>Laddar...</p></div>;
+    if (loading) return <div className="loading-container"><div className="loading"></div><p>Laddar uppgifter...</p></div>;
     // Visar felmeddelande om error inte är null
     if (error) return <p className="error-msg">{error}</p>;
 
