@@ -1,50 +1,46 @@
-# React + TypeScript + Vite
+# DT210G Fördjupad frontend-utveckling - Moment 2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Projektbeskrivning - Todo-applikation
+Detta är en React-applikation byggd med TypeScript där användare kan skapa uppgifter som samlas i en lista. Projektet har skapats som en del av kursen DT210G Fördjupad frontend-utveckling och fokuserar på tillståndshantering, formulärhantering samt integration med ett backend-API.
 
-Currently, two official plugins are available:
+## Funktionalitet
+- Hämta och visa en lista över befintliga uppgifter
+- Lägga till nya uppgifter i listan
+- Uppdatera status på en uppgift
+- Ta bort en uppgift efter bekräftelse
+- Uppgifter sorteras efter status Ej startad, Pågående, Avslutad
+- Laddningshantering vid inläsning av data från API-anrop
+- Formulärvalidering där titel är obligatoriskt (minst 3 tecken) samt beskrivning max 200 tecken
+- Felhantering med tydliga felmeddelanden samt bekräftelser vid skapande, uppdatering och borttagning av uppgifter
+- Responsiv design för både desktop och mobila enheter
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tekniker
+### Frontend
+- **React**
+- **TypeScript**
+- **JSX/TSX**
+- **CSS**
+- **Vite**
+- **Yup**
+- **Fetch API**
+### Backend
+- **Hapi.js**
+- **MongoDB**
+- **Mongoose**
 
-## Expanding the ESLint configuration
+## Backend-API
+Projektet kräver ett backend-API för att hantera uppgifter (CRUD-operationer). API:et som skapats stödjer följande:
+- Hämta alla uppgifter
+- Skapa en ny uppgift
+- Uppdatera en specifik uppgift
+- Ta bort en specifik uppgift
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Backend är byggt med Hapi.js och ansluter till en MongoDB-databas med hjälp av Mongoose. Servern hanterar API-anrop och validering av data innan det lagras i databasen. 
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Om
+- **Av:** Isa Westling  
+- **Kurs:** DT210G Fördjupad frontend-utveckling  
+- **Program:** Webbutvecklingsprogrammet  
+- **År:** 2025  
+- **Termin:** 4 (VT)  
+- **Skola:** Mittuniversitetet
