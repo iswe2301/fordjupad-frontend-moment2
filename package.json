@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://iswe2301.github.io/fordjupad-frontend-moment2",
+  "homepage": "https://iswe2301.github.io/fordjupad-frontend-moment2/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
